@@ -12454,29 +12454,28 @@ body.sidebar-toggled footer.sticky-footer {
     width: 100%
 }
 
-/* Costum Scroll */
+/* Costum Scroll
 
 /* width */
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
     width: 6px;
     height: 10px;
-}
+} */
 
 /* Track */
-::-webkit-scrollbar-track {
+/* ::-webkit-scrollbar-track {
     background: #f1f1f1;
-}
+} */
 
 /* Handle */
-::-webkit-scrollbar-thumb {
+/* ::-webkit-scrollbar-thumb {
     background: #4e73df;
-
-}
+} */
 
 /* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
+/* ::-webkit-scrollbar-thumb:hover {
     background: #4366cf;
-}
+} */
 
 .table-responsive-foodrecord {
     width: 100%;
@@ -12617,4 +12616,8 @@ body.sidebar-toggled footer.sticky-footer {
     #transTables_paginate {
         float: left;
     }
+}
+
+.fixed-columns {
+    background-color: #f1f1f1;
 }

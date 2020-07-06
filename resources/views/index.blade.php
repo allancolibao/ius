@@ -37,6 +37,15 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('add')}}">Add</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('remarks')}}">Remarks</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('export')}}">Export</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('transmission')}}">Transmission</a>
+                    </li>
                 </ul>
                 <form class="form-inline my-2 my-md-0" method="post" action="{{ action('MainController@search') }}" role="search">
                     @csrf
@@ -64,16 +73,22 @@
 
         <!-- Core plugin JavaScript-->
         <script src="{{asset('main/vendor/jquery-easing/jquery.easing.min.js')}}"></script>
-
         <script src="{{asset('main/vendor/datatables/jquery.dataTables.min.js')}}"></script>
         <script src="{{asset('main/vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
         <script type="text/javascript" src="{{ asset('main/js/table/datatables.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/fixedColumns.js') }}"></script>
 
         {{-- Loading spinner show --}}
         <script type="text/javascript" src="{{ asset('js/loading.js') }}"></script>
 
         {{-- Open as window script --}}
         <script type="text/javascript" src="{{ asset('js/openwindow.js') }}"></script>
+        
+        {{-- Disabled refres (f5) --}}
+        <script type="text/javascript" src="{{ asset('js/refresh.js') }}"></script>
+
+        {{-- Check all --}}
+        <script type="text/javascript" src="{{ asset('js/check.js') }}"></script>
 
         {{-- Toastr alert session condition --}}
         <script type="text/javascript" src="{{ asset('js/toastr.min.js') }}"></script>

@@ -4,10 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Staudenmeir\LaravelUpsert\Eloquent\HasUpsertQueries;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Iycf extends Model
 {
     use HasUpsertQueries;
+    use SoftDeletes;
     /**
      * Define base table
      * 
@@ -478,13 +480,23 @@ class Iycf extends Model
 
 
     /**
-    * Update IYCF Record
+    * Update specific IYCF Record
     * 
     * 
     */
     public function getSpecificIycfRecord($id)
     {
         return $this->where('id', $id)->first();
+    }
+
+    /**
+    * Update IYCF Record
+    * 
+    * 
+    */
+    public function updateIycfRecord($id)
+    {
+        return $this->where('id', $id);
     }
 
 
@@ -496,6 +508,20 @@ class Iycf extends Model
     public function TransIycfRecord($eacode)
     {
         return $this->where('eacode', $eacode)->get()->exclude('id');
+    }
+
+     /**
+    * Get the Exact EACODE for trasmission
+    * 
+    * 
+    */
+    public function updateNewRemarks($eacode, $hcn, $shsn, $memberCode, $data)
+    {
+        return $this->where('eacode', $eacode)
+                    ->where('hcn', $hcn)
+                    ->where('shsn', $shsn)
+                    ->where('member_code', $memberCode)
+                    ->update($data);
     }
 
 }

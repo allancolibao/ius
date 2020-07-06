@@ -16,14 +16,6 @@
                     </div>
                 @endforeach
             @endif
-            <div class="input-group mt-2">
-                <div class="col-md-3">
-                    <label for="remarks">Remarks</label>
-                </div>
-                <div class="col-md-9">
-                    <textarea class="form-control" name="remarks" id="remarks" rows="4">{{$iycf['remarks']}}</textarea>
-                </div>
-            </div>
             <button class="btn btn-primary" type="submit">Update</button>
         </form>
     </div>
