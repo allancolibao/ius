@@ -625,7 +625,7 @@ class MainController extends Controller
 
                 $countBased = $based->get()->count();
                 $countTrans = $transmitted->get()->count();
-            
+
                 $results[] = [
                     'area_name'    => $area->name,
                     'ea'    => $area->ea,
@@ -637,5 +637,22 @@ class MainController extends Controller
         }
 
         return view('transmission', compact('areas','results'));
+    }
+
+
+     /**
+     * Diff Page
+     * 
+     * 
+     */
+    public function diff($ea)
+    {
+
+        $based = Based::where('eacode', 'LIKE', $ea.'%');
+        $transmitted = Iycf::where('eacode', 'LIKE', $ea.'%')->get('eacode');
+
+        $result = $based->whereNotIn('eacode', $transmitted)->distinct()->get('eacode');
+
+        return view('result', compact('result'));
     }
 }

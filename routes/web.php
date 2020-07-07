@@ -33,3 +33,4 @@ Route::get('/delete', 'MainController@delete')->name('delete');
 Route::post('/data/export', 'MainController@exportData')->name('data.export');
 
 Route::get('/trans', 'MainController@transmission')->name('transmission');
+Route::get('/diff/{ea}', 'MainController@diff')->name('diff');
