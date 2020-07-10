@@ -38,13 +38,16 @@
                         <a class="nav-link" href="{{route('add')}}">Add</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('remarks')}}">Remarks</a>
+                        <a class="nav-link" href="{{route('remarks')}}">Update</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('export')}}">Export</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('transmission')}}">Transmission</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-danger" href="{{route('del.page')}}">Delete</a>
                     </li>
                 </ul>
                 <form class="form-inline my-2 my-md-0" method="post" action="{{ action('MainController@search') }}" role="search">

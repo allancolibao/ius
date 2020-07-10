@@ -48,3 +48,9 @@ Route::get('/delete', 'MainController@delete')->name('delete');
 // Transmission page
 Route::get('/trans', 'MainController@transmission')->name('transmission');
 Route::get('/diff/{ea}', 'MainController@diff')->name('diff');
+
+// Delete page
+Route::get('/del', 'MainController@deletePage')->name('del.page');
+Route::post('/import/to/delete', 'MainController@importToDelete')->name('import.to.delete');
+Route::get('/delete/to/delete', 'MainController@deleteToDelete')->name('delete.to.delete');
+Route::get('/del/indiv', 'MainController@deleteIndiv')->name('delete.indiv');

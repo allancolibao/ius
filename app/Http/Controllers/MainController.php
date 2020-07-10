@@ -7,6 +7,7 @@ use Validator;
 use Exception;
 use Illuminate\Support\Str;
 use App\Imports\RemarksImport;
+use App\Imports\DeleteImport;
 use App\Exports\DataExport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Iycf;
@@ -14,6 +15,7 @@ use App\Field;
 use App\Remarks;
 use App\Area;
 use App\Based;
+use App\Delete;
 
 class MainController extends Controller
 {
@@ -23,13 +25,14 @@ class MainController extends Controller
      *
      * @return void
      */
-    public function __construct(Iycf $iycf, Field $field, Remarks $remarks, Area $area, Based $based)
+    public function __construct(Iycf $iycf, Field $field, Remarks $remarks, Area $area, Based $based, Delete $delete)
     {
         $this->iycf = $iycf;
         $this->field = $field;
         $this->remarks = $remarks;
         $this->area = $area;
         $this->based = $based;
+        $this->delete = $delete;
     }
 
     /**
@@ -655,4 +658,100 @@ class MainController extends Controller
 
         return view('result', compact('result'));
     }
+
+
+    /**
+     * Delete Page
+     * 
+     * 
+     */
+    public function deletePage()
+    {
+        $toDelete = $this->delete->getAllToDelete();
+
+        return view('delete', compact('toDelete'));
+    }
+
+
+    /**
+    * 
+    * 
+    * Import to delete members
+    */
+    public function importToDelete() 
+    {
+        try {
+
+            Excel::import(new DeleteImport, request()->file('file'));
+
+        } catch (Exception $error) {
+
+            $notification = [
+
+                'message' => 'Please double check the CSV File, Particulary the header!',
+                'alert-type' => 'error'
+            ];
+
+            return redirect()->back()->with($notification);
+        }
+
+           
+        $notification = [
+            'message' => 'Data successfully uploaded!',
+            'alert-type' => 'success'
+        ];
+
+        return redirect()->back()->with($notification);
+    }
+
+
+
+    /**
+    *  Delete uploaded CSV Data
+    */
+    public function deleteToDelete() 
+    {
+        
+        $deleted = Delete::truncate();
+
+        $notification = [
+            'message' => 'Data successfully deleted!',
+            'alert-type' => 'warning'
+        ];
+
+        return redirect()->back()->with($notification);
+    }
+
+
+    /**
+     * Remarks Page
+     * 
+     * 
+     */
+    public function deleteIndiv()
+    {
+        $toDelete = $this->delete->getAllToDelete();
+
+        if(sizeof($toDelete) > 0) {
+            foreach($toDelete as $index => $indiv){
+
+                $eacode =  $indiv->eacode;
+                $hcn =  $indiv->hcn; 
+                $shsn =  $indiv->shsn; 
+                $memberCode =  $indiv->member_code;
+
+                $deletedIndiv = $this->iycf->deleteTheSpecificIndiv($eacode, $hcn, $shsn, $memberCode);
+            }
+        }
+
+        $deleted = Delete::truncate();
+
+        $notification = [
+            'message' => 'Data successfully deleted!',
+            'alert-type' => 'success'
+        ];
+
+        return redirect()->back()->with($notification); 
+    }
+
 }

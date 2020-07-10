@@ -524,4 +524,19 @@ class Iycf extends Model
                     ->update($data);
     }
 
+
+    /**
+    * Get the Exact EACODE for trasmission
+    * 
+    * 
+    */
+    public function deleteTheSpecificIndiv($eacode, $hcn, $shsn, $memberCode)
+    {
+        return $this->where('eacode', $eacode)
+                    ->where('hcn', $hcn)
+                    ->where('shsn', $shsn)
+                    ->where('member_code', $memberCode)
+                    ->delete();
+    }
+
 }

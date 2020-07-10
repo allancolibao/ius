@@ -1,13 +1,13 @@
 @extends('index')
 
 @section('content')
-<h3>Update Interview Status and Remarks using excel or csv file.</h3>
+<h3>Delete member using excel or csv file.</h3>
 <div class="card bg-light my-4">
     <div class="card-header">
         Uploaded CSV Data <span class="text-danger">(Please double check the header before import the CSV)</span>
     </div>
     <div class="card-body">
-        <form action="{{ route('import') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('import.to.delete') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <input type="file" name="file" class="form-control" required>
             <br>
@@ -25,29 +25,25 @@
             <th>HCN</th>
             <th>SHSN</th>
             <th>MEMBER NO</th>
-            <th>IS</th>
-            <th>REMARKS</th>
         </tr>
     </thead>
     <tbody style="background-color: #fff">
-    @if(sizeOf($remarks) > 0)
-        @foreach ($remarks as $data)
+    @if(sizeOf($toDelete) > 0)
+        @foreach ($toDelete as $data)
             <tr>
                 <td>{{$data->eacode}}</td>
                 <td>{{$data->hcn}}</td>
                 <td>{{$data->shsn}}</td>
                 <td>{{$data->member_code}}</td>
-                <td>{{$data->is}}</td>
-                <td>{{$data->remarks}}</td>
             </tr>
         @endforeach
         <div>
-            <a href="{{route('update.remarks')}}">
-                <button type="button" class="d-sm-inline-block btn  btn-primary shadow-sm">
-                    Update Interview Status and Remarks
+            <a href="{{route('delete.indiv')}}">
+                <button type="button" class="d-sm-inline-block btn  btn-warning shadow-sm">
+                    Delete Individuals
                 </button>
             </a>
-            <a href="{{ route('delete')}}">
+            <a href="{{ route('delete.to.delete')}}">
                 <button type="button" class="d-sm-inline-block btn  btn-danger shadow-sm">
                     Delete Uploaded Data
                 </button>
